@@ -19,12 +19,24 @@ function randChar()
 
     return randChar;
 }
+function copyToClipboard() {
+
+    var copyText = document.getElementById("passArea");
+  
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    
+    document.execCommand("copy");
+  
+    alert("Copied the text: " + copyText.value);
+  }
+
 document.getElementById("generateButton").onclick = function()
 {
     var numChars = document.getElementById("charNum").valueAsNumber;
     randSet = "";
     randString = ""
-
+    
     if(document.getElementById("lowerChar").checked)
     {
         lowerCheck = true;
@@ -61,20 +73,17 @@ document.getElementById("generateButton").onclick = function()
     {
         specCheck = false;
     }
-    console.log(numChars);
-    for (var i = 0; i < numChars; i++)
+    if (lowerCheck === false && upperCheck === false && numberCheck === false && specCheck === false)
     {
-        randString += randChar();
-    }
-
-    var pass = document.createElement("p");
-    var passChars = document.createTextNode("Your new password is: " + randString);
-    var passHolder = document.getElementById("passHolder");
-    pass.appendChild(passChars);
-
-    passHolder.appendChild(pass);
-
-
+        alert("Please check at least one option!");
+    }else
+    {
+        console.log(numChars);
+        for (var i = 0; i < numChars; i++)
+        {
+            randString += randChar();
+        }
+    document.getElementById("passArea").value = randString
     console.log(numChars);
     console.log(lowerCheck);
     console.log(upperCheck);
@@ -82,4 +91,9 @@ document.getElementById("generateButton").onclick = function()
     console.log(specCheck);
     
     console.log(randString);
+}
+    document.getElementById("copyBtn").onclick = function()
+    {
+        copyToClipboard();
+    }
 }
