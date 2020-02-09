@@ -4,17 +4,13 @@ var upperCharset ="QWERTYUIOPASDFGHJKLZXCVBNM";
 var numberSet ="1234567890";
 var specCharset ="!@#$%^&*()";
 var randSet ="";
-var numChars = document.getElementById("charNum");
+
 var randString = "";
 
 var lowerCheck = false;
 var upperCheck = false;
 var numberCheck = false;
 var specCheck = false;
-
-numChars.value.trim();
-
-numCharsint = parseInt(numChars.value);
 
 function randChar()
 {
@@ -25,6 +21,9 @@ function randChar()
 }
 document.getElementById("generateButton").onclick = function()
 {
+    var numChars = document.getElementById("charNum").valueAsNumber;
+    randSet = "";
+    randString = ""
 
     if(document.getElementById("lowerChar").checked)
     {
@@ -62,12 +61,21 @@ document.getElementById("generateButton").onclick = function()
     {
         specCheck = false;
     }
-    console.log(numCharsint);
-    for (var i = 0; i < numCharsint; i++)
+    console.log(numChars);
+    for (var i = 0; i < numChars; i++)
     {
         randString += randChar();
     }
 
+    var pass = document.createElement("p");
+    var passChars = document.createTextNode("Your new password is: " + randString);
+    var passHolder = document.getElementById("passHolder");
+    pass.appendChild(passChars);
+
+    passHolder.appendChild(pass);
+
+
+    console.log(numChars);
     console.log(lowerCheck);
     console.log(upperCheck);
     console.log(numberCheck);
